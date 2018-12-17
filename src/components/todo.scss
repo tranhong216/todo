@@ -1,0 +1,58 @@
+ul {
+  margin-top: 2.6rem;
+  list-style: none;
+
+  li {
+    display: flex;
+    margin: 0 -3rem 4px;
+    padding: 1.1rem 3rem;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.1);
+  }
+
+  span.label {
+    position: relative;
+    transition: opacity .2s linear;
+    color: #fff;
+  }
+
+  .done {
+    .label {
+      opacity: .6;
+
+      &:before {
+        content:'';
+        position:absolute;
+        top:50%;
+        left:-.5rem;
+        display:block;
+        width:0%;
+        height:1px;
+        background:#FFF;
+        animation:strikeitem .3s ease-out 0s forwards;
+      }
+    }
+
+  }
+
+  .actions {
+    flex-shrink: 0;
+    padding-left: 0.7rem;
+  }
+
+  .btn-picto {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #fff;
+    -webkit-appearance: none;
+
+    
+
+    svg {
+      font-size: 20px;
+      margin-right: 7px;
+    }
+  }
+}
