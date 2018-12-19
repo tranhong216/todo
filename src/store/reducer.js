@@ -2,7 +2,7 @@ import * as actionTypes from './actions';
 
 const initialState = {
   todos: [],
-  inactive: false
+  sortItem: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.ADD_TODO:
       const newTodo = {
         id: Math.random(),
-        content: action.todoData.content,
+        content: action.payload.content,
         done: false
       }
       return {...state, todos: state.todos.concat(newTodo)}
@@ -30,29 +30,20 @@ const reducer = (state = initialState, action) => {
       }
     case actionTypes.TOGGLE_SORT:
       const listTodo = [...state.todos];
-      if(!state.inactive) {
+      if(!state.sortItem) {
         let doneTodo = listTodo.filter( item => item.done )
         let notdone = listTodo.filter( item => !item.done )
         return {
           ...state,
           todos: [...notdone, ...doneTodo],
-          inactive: !state.inactive,
+          sortItem: !state.sortItem,
         }
       } else {
-        listTodo.sort((e1, e2) => {
-          if (e2.id < e1.id) {
-            return 1;
-          }
-          if (e2.id > e1.id) {
-            return -1;
-          }
-
-          return 0;
-        });
+        listTodo.sort((e1, e2) => e1.id - e2.id);
         return {
           ...state,
           todos: [...listTodo],
-          inactive: !state.inactive
+          sortItem: !state.sortItem
         }
       }
     default:
